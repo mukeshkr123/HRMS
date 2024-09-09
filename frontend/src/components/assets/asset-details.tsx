@@ -1,5 +1,7 @@
+import { useState } from "react"
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
+import { RequestAssetModal } from "./request-asset-modal"
 
 export type Asset = {
     id: string
@@ -54,6 +56,7 @@ const assets: Asset[] = [
 
 
 export const AssetDetails = () => {
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
     return (
         <section>
             <div className="flex items-center gap-x-10">
@@ -61,6 +64,10 @@ export const AssetDetails = () => {
                     <img src="/icons/monitor-mobbile.svg" alt="" />
                     <span>Assets</span>
                 </div>
+                <RequestAssetModal
+                    isOpen={isDialogOpen}
+                    setIsOpen={setIsDialogOpen}
+                />
             </div>
 
             <div className="mt-6">

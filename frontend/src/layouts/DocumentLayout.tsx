@@ -6,6 +6,7 @@ import { AddNewDialog } from "@/components/modal/add-new-model"
 import { Button } from "@/components/ui/button"
 import { useDocumentStore } from "@/context/use-document"
 import { CirclePlus, FilePlus } from "lucide-react"
+import { useState } from "react"
 import { Outlet } from "react-router-dom"
 
 const folders = [
@@ -29,10 +30,16 @@ export const DocumentLayout = () => {
     const { currentFolderId } = useDocumentStore()
     const createFolderMutation = useCreateFolder(currentFolderId!)
     const uploadFileMutation = useUploadFile(currentFolderId!)
+    const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
+    const [isUploadFileDialogOpen, setIsUploadFileDialogOpen] = useState(false);
+
 
     const handleCreateFolder = (values: any) => {
-        console.log(values);
-        createFolderMutation.mutate(values)
+        createFolderMutation.mutate(values, {
+            onSuccess: () => {
+                setIsFolderDialogOpen(false);
+            }
+        })
     }
 
     const handleFileUpload = (values: { file: File | null }) => {
@@ -45,7 +52,7 @@ export const DocumentLayout = () => {
         }
     };
     return (
-        <div className="w-full flex flex-col gap-y-4">
+        <div className="w-full flex flex-col gap-y-4 relative">
             <div className="mt-6">
                 <div className="flex items-center gap-4">
                     <div className="flex gap-2.5">
@@ -58,6 +65,8 @@ export const DocumentLayout = () => {
                         label="Upload Your File"
                         formItemLabel="Select File"
                         onSubmit={handleFileUpload}
+                        isOpen={isUploadFileDialogOpen}
+                        setIsOpen={setIsUploadFileDialogOpen}
                     >
                         <Button
                             variant="addAction"
@@ -66,13 +75,14 @@ export const DocumentLayout = () => {
                             <CirclePlus size={18} /> Add a File
                         </Button>
                     </FileUploadDialog>
-
                     <AddNewDialog
                         fieldName="name"
                         placeholder="Folder name"
                         label="Add New Folder"
                         formItemLabel="Name"
                         onSubmit={handleCreateFolder}
+                        isOpen={isFolderDialogOpen}
+                        setIsOpen={setIsFolderDialogOpen}
                     >
                         <Button
                             className="font-normal flex items-center justify-center gap-x-2 bg-[#1FBE8E] h-8 hover:bg-[#1FBE8E] text-[#313131]  shadow-sm"

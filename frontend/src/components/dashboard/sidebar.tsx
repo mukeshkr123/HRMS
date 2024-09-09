@@ -33,11 +33,11 @@ export const DashboardSideBar = () => {
             route: "/profiles",
             icon: Users,
         },
-        {
-            label: "Reports",
-            route: "/reports",
-            icon: BarChart3,
-        },
+        // {
+        //     label: "Reports",
+        //     route: "/reports",
+        //     icon: BarChart3,
+        // },
         {
             label: "Documents",
             route: "/documents",

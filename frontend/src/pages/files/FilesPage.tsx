@@ -28,7 +28,7 @@ export const FilesPage = () => {
     return (
         <div className="w-full">
             {previousFolder && (
-                <div>
+                <div className="absolute top-6 right-0 flex items-center gap-2.5">
                     <CircleArrowLeft
                         onClick={handleBackClick}
                         className="cursor-pointer"

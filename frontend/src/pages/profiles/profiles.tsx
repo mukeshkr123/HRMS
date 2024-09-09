@@ -1,7 +1,7 @@
 import { useGetProfiles } from "@/api/profiles/use-get-profiles";
-import { DepartmentColumnData } from "@/components/departments/department-data-coloums";
-import { DepartmentDataTable } from "@/components/departments/department-data-table";
 import { AddNewProfile } from "@/components/profiles/add-new-profile";
+import { ProfileColumnData } from "@/components/profiles/profiles-data-coloums";
+import { ProfileDataTable } from "@/components/profiles/profiles-data-table";
 
 export const ProfilesPage = () => {
     const { data, isLoading } = useGetProfiles()
@@ -17,8 +17,8 @@ export const ProfilesPage = () => {
                 <AddNewProfile />
             </div>
             <div>
-                <DepartmentDataTable
-                    columns={DepartmentColumnData}
+                <ProfileDataTable
+                    columns={ProfileColumnData}
                     data={data}
                 />
             </div>
